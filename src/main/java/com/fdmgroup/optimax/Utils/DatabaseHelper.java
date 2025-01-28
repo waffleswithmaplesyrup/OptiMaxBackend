@@ -56,15 +56,18 @@ public class DatabaseHelper {
 
         cardBenefitRepository.saveAll(Arrays.asList(
                 // Citi PremierMiles Card
-                new CardBenefit(BenefitType.MILES, 2.0, cards.get(0)),
+                new CardBenefit(BenefitType.MILES, 1.2, "Local Spending", cards.get(0)),
+                new CardBenefit(BenefitType.MILES, 1.2, "Foreign Spending (retail & online)", cards.get(0)),
                 // SC Simply Cash Credit Card
-                new CardBenefit(BenefitType.CASHBACK, 2.0, cards.get(1)),
+                new CardBenefit(BenefitType.CASHBACK, 3.0, "", cards.get(1)),
                 // Citi Rewards
-                new CardBenefit(BenefitType.POINTS, 10.0, cards.get(2)),
+                new CardBenefit(BenefitType.POINTS, 10.0, "", cards.get(2)),
                 // OCBC 365
-                new CardBenefit(BenefitType.CASHBACK, 2.0, cards.get(3)),
+                new CardBenefit(BenefitType.CASHBACK, 3.0, "Watsons, Streaming, EV Charging", cards.get(3)),
+                new CardBenefit(BenefitType.CASHBACK, 5.0, "Dining", cards.get(3)),
+                new CardBenefit(BenefitType.CASHBACK, 6.0, "Fuel at Petrol Stations", cards.get(3)),
                 // SC Rewards+
-                new CardBenefit(BenefitType.POINTS, 2.0, cards.get(4))
+                new CardBenefit(BenefitType.POINTS, 2.0, "", cards.get(4))
         ));
 
     }

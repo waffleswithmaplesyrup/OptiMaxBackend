@@ -19,13 +19,15 @@ public class CardBenefit {
     @Enumerated(EnumType.STRING)
     private BenefitType benefitType;
     private Double benefitRate;
+    private String condition;
     @ManyToOne
     @JoinColumn(name = "FK_cardId")
     private Card card;
 
-    public CardBenefit(BenefitType benefitType, Double benefitRate, Card card) {
+    public CardBenefit(BenefitType benefitType, Double benefitRate, String condition, Card card) {
         this.benefitType = benefitType;
         this.benefitRate = benefitRate;
+        this.condition = condition;
         this.card = card;
     }
 }

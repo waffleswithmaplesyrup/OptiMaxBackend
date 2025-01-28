@@ -1,6 +1,7 @@
 package com.fdmgroup.optimax.Model;
 
 import com.fdmgroup.optimax.ENUM.Bank;
+import com.fdmgroup.optimax.ENUM.CapRate;
 import com.fdmgroup.optimax.ENUM.Issuer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,11 +25,17 @@ public class Card {
     @Column(unique = true)
     private String name;
     private String image;
+    private int minSpend;
+    private int cap;
+    private CapRate capRate;
 
-    public Card(Issuer issuer, Bank bank, String name, String image) {
+    public Card(Issuer issuer, Bank bank, String name, String image, int minSpend, int cap, CapRate capRate) {
         this.issuer = issuer;
         this.bank = bank;
         this.name = name;
         this.image = image;
+        this.minSpend = minSpend;
+        this.cap = cap;
+        this.capRate = capRate;
     }
 }

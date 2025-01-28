@@ -2,6 +2,7 @@ package com.fdmgroup.optimax.Utils;
 
 import com.fdmgroup.optimax.ENUM.Bank;
 import com.fdmgroup.optimax.ENUM.BenefitType;
+import com.fdmgroup.optimax.ENUM.CapRate;
 import com.fdmgroup.optimax.ENUM.Issuer;
 import com.fdmgroup.optimax.Model.Card;
 import com.fdmgroup.optimax.Model.CardBenefit;
@@ -39,15 +40,16 @@ public class DatabaseHelper {
     public void saveCardTypes() {
         cardRepository.saveAll(Arrays.asList(
             // miles
-            new Card(Issuer.MASTERCARD, Bank.CITIBANK, "Citi PremierMiles Card", "/assets/cards/Citi_PremierMiles_Card.png"),
+            new Card(Issuer.MASTERCARD, Bank.CITIBANK, "Citi PremierMiles Card", "/assets/cards/Citi_PremierMiles_Card.png", 0, 0, CapRate.UNLIMITED),
             // cashback
-            new Card(Issuer.MASTERCARD, Bank.STANDARD_CHARTERED, "Standard Chartered Simply Cash Credit Card", "/assets/cards/Standard_Chartered_Simply_Cash_Credit_Card.png"),
+            // zero cap means unlimited
+            new Card(Issuer.MASTERCARD, Bank.STANDARD_CHARTERED, "Standard Chartered Simply Cash Credit Card", "/assets/cards/Standard_Chartered_Simply_Cash_Credit_Card.png", 0, 0, CapRate.UNLIMITED),
             // points
-            new Card(Issuer.MASTERCARD, Bank.CITIBANK, "Citi Rewards Card", "/assets/cards/Citi_Rewards_Card.png"),
+            new Card(Issuer.MASTERCARD, Bank.CITIBANK, "Citi Rewards Card", "/assets/cards/Citi_Rewards_Card.png", 0, 9_000, CapRate.MONTHLY),
             // cashback
-            new Card(Issuer.VISA, Bank.OCBC, "OCBC 365 Credit Card", "/assets/cards/OCBC_365_Credit_Card.png"),
+            new Card(Issuer.VISA, Bank.OCBC, "OCBC 365 Credit Card", "/assets/cards/OCBC_365_Credit_Card.png", 800, 80, CapRate.MONTHLY),
             // points
-            new Card(Issuer.VISA, Bank.STANDARD_CHARTERED, "Standard Chartered Rewards+ Credit Card", "/assets/cards/Standard_Chartered_Rewards+_Credit Card.png")
+            new Card(Issuer.VISA, Bank.STANDARD_CHARTERED, "Standard Chartered Rewards+ Credit Card", "/assets/cards/Standard_Chartered_Rewards+_Credit Card.png", 0, 20_000, CapRate.YEARLY)
         ));
     }
 
@@ -57,17 +59,21 @@ public class DatabaseHelper {
         cardBenefitRepository.saveAll(Arrays.asList(
                 // Citi PremierMiles Card
                 new CardBenefit(BenefitType.MILES, 1.2, "Local Spending", cards.get(0)),
-                new CardBenefit(BenefitType.MILES, 1.2, "Foreign Spending (retail & online)", cards.get(0)),
+                new CardBenefit(BenefitType.MILES, 2.2, "Foreign Spending (retail & online)", cards.get(0)),
                 // SC Simply Cash Credit Card
-                new CardBenefit(BenefitType.CASHBACK, 3.0, "", cards.get(1)),
+                new CardBenefit(BenefitType.CASHBACK, 1.5, "Caltex, Petrol, Dining, Shopping", cards.get(1)),
                 // Citi Rewards
-                new CardBenefit(BenefitType.POINTS, 10.0, "", cards.get(2)),
+                new CardBenefit(BenefitType.POINTS, 10.0, "Online: grocery, food delivery, ride-hailing", cards.get(2)),
+                new CardBenefit(BenefitType.POINTS, 10.0, "In-store: department store, clothing store", cards.get(2)),
+                new CardBenefit(BenefitType.POINTS, 1.0, "All other purchases", cards.get(2)),
                 // OCBC 365
                 new CardBenefit(BenefitType.CASHBACK, 3.0, "Watsons, Streaming, EV Charging", cards.get(3)),
                 new CardBenefit(BenefitType.CASHBACK, 5.0, "Dining", cards.get(3)),
                 new CardBenefit(BenefitType.CASHBACK, 6.0, "Fuel at Petrol Stations", cards.get(3)),
                 // SC Rewards+
-                new CardBenefit(BenefitType.POINTS, 2.0, "", cards.get(4))
+                new CardBenefit(BenefitType.POINTS, 10.0, "Foreign spending: retail, dining, travel", cards.get(4)),
+                new CardBenefit(BenefitType.POINTS, 5.0, "Local dining", cards.get(4)),
+                new CardBenefit(BenefitType.POINTS, 1.0, "All other purchases", cards.get(4))
         ));
 
     }

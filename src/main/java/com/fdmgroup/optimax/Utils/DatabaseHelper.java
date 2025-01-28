@@ -96,10 +96,10 @@ public class DatabaseHelper {
         List<Card> cards = cardRepository.findAll();
 
         userCardRepository.saveAll(Arrays.asList(
-            new UserCard("4242 4242 4242 4242", LocalDateTime.of(2027, Month.AUGUST, 12, 0, 0), users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size()))),
-            new UserCard("4545 4545 4545 4545", LocalDateTime.of(2027, Month.APRIL, 23, 0, 0), users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size()))),
-            new UserCard("4040 4141 4242 4343", LocalDateTime.of(2028, Month.FEBRUARY, 20, 0, 0), users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size()))),
-            new UserCard("5252 5252 5252 5252", LocalDateTime.of(2029, Month.JANUARY, 17, 0, 0), users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size())))
+            new UserCard("4242 4242 4242 4242", LocalDateTime.of(2027, Month.AUGUST, 12, 0, 0), 10.0, users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size()))),
+            new UserCard("4545 4545 4545 4545", LocalDateTime.of(2027, Month.APRIL, 23, 0, 0), 0.0, users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size()))),
+            new UserCard("4040 4141 4242 4343", LocalDateTime.of(2028, Month.FEBRUARY, 20, 0, 0), 2.0, users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size()))),
+            new UserCard("5252 5252 5252 5252", LocalDateTime.of(2029, Month.JANUARY, 17, 0, 0), 0.0, users.get((int) (Math.random() * users.size())), cards.get((int) (Math.random() * cards.size())))
         ));
     }
 

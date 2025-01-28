@@ -19,6 +19,7 @@ public class UserCard {
     private int userCardId;
     private String cardNumber;
     private LocalDateTime expiryDate;
+    private Double rewardsEarned;
 
     @ManyToOne
     @JoinColumn(name = "FK_userId")
@@ -27,9 +28,10 @@ public class UserCard {
     @JoinColumn(name = "FK_cardId")
     private Card card;
 
-    public UserCard(String cardNumber, LocalDateTime expiryDate, User user, Card card) {
+    public UserCard(String cardNumber, LocalDateTime expiryDate, Double rewardsEarned, User user, Card card) {
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
+        this.rewardsEarned = rewardsEarned;
         this.user = user;
         this.card = card;
     }

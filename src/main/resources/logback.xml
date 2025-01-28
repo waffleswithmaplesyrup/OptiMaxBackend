@@ -1,0 +1,29 @@
+<configuration>
+
+    <!-- Define loggers -->
+    <logger name="com.fdm.forex" level="INFO" additivity="false">
+        <appender-ref ref="FILE"/> <!-- Reference the file appender -->
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- Define appenders -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File appender -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>application.log</file> <!-- Specify the log file path -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

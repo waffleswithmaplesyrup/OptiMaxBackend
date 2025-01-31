@@ -1,0 +1,80 @@
+query allCards {
+  getAllCards {
+    cardId
+    issuer
+    bank
+    name
+    image
+    minSpend
+    cap
+    capRate
+  }
+}
+
+query cardDetails {
+  getCardById(cardId: 1) {
+    cardId
+    issuer
+    bank
+    name
+    image
+    minSpend
+    cap
+    capRate
+  }
+}
+
+query getAllCardsByUser {
+  getAllCardsByUser(userId: 1) {
+    user {
+      userId
+      username
+      email
+    }
+    card {
+      cardId
+      issuer
+      bank
+      name
+      image
+      minSpend
+      cap
+      capRate
+    }
+    cardNumber
+    expiryDate
+  }
+}
+
+mutation onboardNewCard($userCardRequest: UserCardRequest!) {
+  onboardNewCard(userCardRequest: $userCardRequest) {
+    card {
+      cardId
+      issuer
+      bank
+      name
+      image
+      minSpend
+      cap
+      capRate
+    }
+    user {
+      userId
+      username
+      email
+    }
+    cardNumber
+    expiryDate
+    rewardsEarned
+  }
+}
+
+{
+  "userCardRequest": {
+    "cardNumber": "8282 4242 4242 4242",
+    "expiryDate": "2025-08-23T00:00",
+    "rewardsEarned": 12,
+    "userId": 1,
+    "cardId": 5
+  }
+}

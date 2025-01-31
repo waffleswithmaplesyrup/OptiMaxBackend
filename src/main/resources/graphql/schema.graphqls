@@ -24,8 +24,21 @@ type UserCard {
     card: Card
 }
 
+input UserCardRequest {
+    cardNumber: String
+    expiryDate: String
+    rewardsEarned: Float
+    userId: ID
+    cardId: ID
+
+}
+
 type Query {
     getAllCards: [Card]
     getCardById(cardId: ID): Card
     getAllCardsByUser(userId: ID): [UserCard]
+}
+
+type Mutation {
+    onboardNewCard(userCardRequest: UserCardRequest): UserCard
 }

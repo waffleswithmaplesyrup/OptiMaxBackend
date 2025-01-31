@@ -23,3 +23,8 @@ type UserCard {
     user: User
     card: Card
 }
+
+type Query {
+    getAllCards: [Card]
+    getCardById(cardId: ID): Card
+}

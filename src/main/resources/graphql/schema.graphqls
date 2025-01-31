@@ -1,0 +1,25 @@
+type Card {
+    cardId: ID
+    issuer: String
+    bank: String
+    name: String
+    image: String
+    minSpend: Int
+    cap: Int
+    capRate: String
+}
+
+type User {
+    userId: ID
+    username: String
+    email: String
+}
+
+type UserCard {
+    userCardId: ID
+    cardNumber: String
+    expiryDate: String
+    rewardsEarned: Float
+    user: User
+    card: Card
+}

@@ -4,14 +4,8 @@ import com.fdmgroup.optimax.ENUM.Bank;
 import com.fdmgroup.optimax.ENUM.BenefitType;
 import com.fdmgroup.optimax.ENUM.CapRate;
 import com.fdmgroup.optimax.ENUM.Issuer;
-import com.fdmgroup.optimax.Model.Card;
-import com.fdmgroup.optimax.Model.CardBenefit;
-import com.fdmgroup.optimax.Model.User;
-import com.fdmgroup.optimax.Model.UserCard;
-import com.fdmgroup.optimax.Repository.CardBenefitRepository;
-import com.fdmgroup.optimax.Repository.CardRepository;
-import com.fdmgroup.optimax.Repository.UserCardRepository;
-import com.fdmgroup.optimax.Repository.UserRepository;
+import com.fdmgroup.optimax.Model.*;
+import com.fdmgroup.optimax.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,13 +22,19 @@ public class DatabaseHelper {
     private final CardRepository cardRepository;
     private final CardBenefitRepository cardBenefitRepository;
     private final UserCardRepository userCardRepository;
+    private final ExistingCardRepository existingCardRepository;
 
     @Autowired
-    public DatabaseHelper(UserRepository userRepository, CardRepository cardRepository, CardBenefitRepository cardBenefitRepository, UserCardRepository userCardRepository) {
+    public DatabaseHelper(UserRepository userRepository,
+                          CardRepository cardRepository,
+                          CardBenefitRepository cardBenefitRepository,
+                          UserCardRepository userCardRepository,
+                          ExistingCardRepository existingCardRepository) {
         this.userRepository = userRepository;
         this.cardRepository = cardRepository;
         this.cardBenefitRepository = cardBenefitRepository;
         this.userCardRepository = userCardRepository;
+        this.existingCardRepository = existingCardRepository;
     }
 
     public void saveCardTypes() {
@@ -105,6 +105,31 @@ public class DatabaseHelper {
             new UserCard("4234337664570724", LocalDateTime.of(2026, Month.JANUARY, 1, 0, 0), 0.0, users.get(1), cards.get(3)),
             new UserCard("4148474731976256", LocalDateTime.of(2028, Month.NOVEMBER, 1, 0, 0), 0.0, users.get(2), cards.get(4)),
             new UserCard("4919791662317987", LocalDateTime.of(2025, Month.SEPTEMBER, 1, 0, 0), 0.0, users.get(0), cards.get(4))
+        ));
+    }
+
+    public void saveExistingCards() {
+        existingCardRepository.saveAll(Arrays.asList(
+            // MASTERCARD
+            new ExistingCard("5408358684697641", Bank.CITIBANK, Issuer.MASTERCARD),
+            new ExistingCard("5458746082021233", Bank.STANDARD_CHARTERED, Issuer.MASTERCARD),
+            new ExistingCard("5571100507478051", Bank.CITIBANK, Issuer.MASTERCARD),
+            new ExistingCard("5102499255511248", Bank.CITIBANK, Issuer.MASTERCARD),
+
+            // Exists in Bank DB but not in our DB
+            new ExistingCard("5244591799091692", Bank.STANDARD_CHARTERED, Issuer.MASTERCARD),
+            new ExistingCard("5320142734412796", Bank.CITIBANK, Issuer.MASTERCARD),
+
+            // VISA
+            new ExistingCard("4234337664570724", Bank.OCBC, Issuer.VISA),
+            new ExistingCard("4148474731976256", Bank.STANDARD_CHARTERED, Issuer.VISA),
+            new ExistingCard("4919791662317987", Bank.STANDARD_CHARTERED, Issuer.VISA),
+
+            // Exists in Bank DB but not in our DB
+            new ExistingCard("4123556402105154", Bank.OCBC, Issuer.VISA),
+            new ExistingCard("4548061800725452", Bank.STANDARD_CHARTERED, Issuer.VISA)
+
+
         ));
     }
 

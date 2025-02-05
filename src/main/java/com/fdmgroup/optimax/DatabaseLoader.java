@@ -31,5 +31,8 @@ public class DatabaseLoader implements ApplicationRunner {
         // save user cards to db
         databaseHelper.saveUserCards();
 
+        // save existing cards to db
+        databaseHelper.saveExistingCards();
+
     }
 }

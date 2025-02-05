@@ -37,6 +37,7 @@ type Query {
     getAllCards: [Card]
     getCardById(cardId: ID): Card
     getAllCardsByUser(userId: ID): [UserCard]
+    getIssuerDuringOnboarding(cardNumber: String): String
 }
 
 type Mutation {

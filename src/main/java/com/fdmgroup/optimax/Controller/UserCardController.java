@@ -1,6 +1,7 @@
 package com.fdmgroup.optimax.Controller;
 
 import com.fdmgroup.optimax.DTO.UserCardRequest;
+import com.fdmgroup.optimax.ENUM.Issuer;
 import com.fdmgroup.optimax.Model.UserCard;
 import com.fdmgroup.optimax.Service.UserCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class UserCardController {
     @QueryMapping
     public List<UserCard> getAllCardsByUser(@Argument int userId) {
         return userCardService.getAllCardsByUser(userId);
+    }
+
+    @QueryMapping
+    public Issuer getIssuerDuringOnboarding(@Argument String cardNumber) {
+        return userCardService.getIssuerDuringOnboarding(cardNumber);
     }
 
     @MutationMapping

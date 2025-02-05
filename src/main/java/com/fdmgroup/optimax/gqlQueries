@@ -46,6 +46,10 @@ query getAllCardsByUser {
   }
 }
 
+query getIssuer {
+  getIssuerDuringOnboarding(cardNumber: "2221061800725452")
+}
+
 mutation onboardNewCard($userCardRequest: UserCardRequest!) {
   onboardNewCard(userCardRequest: $userCardRequest) {
     card {
@@ -71,10 +75,10 @@ mutation onboardNewCard($userCardRequest: UserCardRequest!) {
 
 {
   "userCardRequest": {
-    "cardNumber": "8282 4242 4242 4242",
-    "expiryDate": "2025-08-23T00:00",
+    "cardNumber": "4123556402105154",
+    "expiryDate": "2025-08-01T00:00",
     "rewardsEarned": 12,
-    "userId": 1,
+    "userId": 2,
     "cardId": 5
   }
 }

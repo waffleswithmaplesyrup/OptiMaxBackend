@@ -3,9 +3,11 @@ package com.fdmgroup.optimax.Service;
 import com.fdmgroup.optimax.DTO.UserCardRequest;
 import com.fdmgroup.optimax.ENUM.Issuer;
 import com.fdmgroup.optimax.Model.Card;
+import com.fdmgroup.optimax.Model.ExistingCard;
 import com.fdmgroup.optimax.Model.User;
 import com.fdmgroup.optimax.Model.UserCard;
 import com.fdmgroup.optimax.Repository.CardRepository;
+import com.fdmgroup.optimax.Repository.ExistingCardRepository;
 import com.fdmgroup.optimax.Repository.UserCardRepository;
 import com.fdmgroup.optimax.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +25,19 @@ public class UserCardService {
     private final UserCardRepository userCardRepository;
     private final UserRepository userRepository;
     private final CardRepository cardRepository;
+    private final ExistingCardRepository existingCardRepository;
 
     @Autowired
     public UserCardService(
             UserCardRepository userCardRepository,
             UserRepository userRepository,
-            CardRepository cardRepository
+            CardRepository cardRepository,
+            ExistingCardRepository existingCardRepository
     ) {
         this.userCardRepository = userCardRepository;
         this.userRepository = userRepository;
         this.cardRepository = cardRepository;
+        this.existingCardRepository = existingCardRepository;
     }
 
     public List<UserCard> getAllCardsByUser(int userId) {
@@ -96,5 +101,21 @@ public class UserCardService {
         );
 
         return userCardRepository.save(newCard);
+    }
+
+    // method to simulate bank approval of card
+    private String bankApprovalSimulation(UserCard userCard) {
+
+        // look for cardNumber in the bank DB (Existing Card entity)
+        Optional<ExistingCard> existingCard = existingCardRepository.findById(userCard.getCardNumber());
+
+        if (existingCard.isEmpty()) return "unapproved";
+
+        // if existing card is found in the bank DB
+        // check if the issuer and bank are correct
+        if (existingCard.get().getBank() != userCard.getCard().getBank()
+        || existingCard.get().getIssuer() != userCard.getCard().getIssuer()) return "unapproved";
+
+        return "approved";
     }
 }
